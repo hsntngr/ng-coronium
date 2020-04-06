@@ -1,0 +1,95 @@
+<ol class="breadcrumb mb-4 mt-4">
+  <li class="breadcrumb-item active">
+    Create New User
+  </li>
+</ol>
+
+
+<form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-md-8 offset-md-1">
+      <v-custom alertView="true" *ngIf="serverSideErrors" [messages]="serverSideErrors"></v-custom>
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" autofocus id="name" name="name" formControlName="name"
+               placeholder="Enter user name" class="form-control">
+        <v-required name="User Name" [validate]="createForm.get('name')"></v-required>
+        <v-max-length [validate]="createForm.get('name')" maxLength="100" name="Name"></v-max-length>
+        <v-custom></v-custom>
+      </div>
+      <div class="form-group">
+        <label for="surname">Surname</label>
+        <input type="text" id="surname" name="surname" formControlName="surname"
+               placeholder="Enter user surname" class="form-control">
+        <v-required name="Surname" [validate]="createForm.get('surname')"></v-required>
+        <v-max-length [validate]="createForm.get('surname')" maxLength="50" name="Surname"></v-max-length>
+      </div>
+      <div class="form-group">
+        <label for="country_id">Country</label>
+        <select id="country_id" name="country_id" formControlName="country_id" class="form-control">
+          <option selected disabled>Select a country_id</option>
+          <option *ngFor="let country of countries" [value]="country.id">{{ country.name_pretty }}</option>
+        </select>
+        <v-required name="Country" [validate]="createForm.get('country_id')"></v-required>
+        <v-max-number [validate]="createForm.get('country_id')" name="country_id Code" maxNumber="238"></v-max-number>
+      </div>
+      <div class="form-group">
+        <label for="phone_country_code">Phone Code</label>
+        <select id="phone_country_code" name="phone_country_code" formControlName="phone_country_code"
+                class="form-control">
+          <option selected disabled>Select a phone code</option>
+          <option *ngFor="let country of countries" [value]="country.code_phone">{{ country.name_pretty }}
+            (+{{ country.code_phone }})
+          </option>
+        </select>
+        <v-max-length [validate]="createForm.get('phone_country_code')" maxLength="6" name="Phone Code"></v-max-length>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="text" id="phone" name="phone" formControlName="phone" class="form-control">
+        <v-max-length [validate]="createForm.get('phone')" maxLength="20" name="Phone Number"></v-max-length>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" formControlName="email" class="form-control">
+        <v-custom></v-custom>
+        <v-required name="Email" [validate]="createForm.get('email')"></v-required>
+        <v-max-length [validate]="createForm.get('email')" maxLength="255" name="Email"></v-max-length>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" formControlName="password"
+               class="form-control" autocomplete="new-password">
+        <v-required name="Password Confirmation" [validate]="createForm.get('password')"></v-required>
+        <v-not-match name="Password" match="Confirmation" [validate]="createForm"></v-not-match>
+        <v-min-length name="Password" minLength="6" [validate]="createForm.get('password')"></v-min-length>
+      </div>
+      <div class="form-group">
+        <label for="password_confirmation">Password Confirmation</label>
+        <input type="password_confirmation" id="password_confirmation" name="password_confirmation"
+               formControlName="password_confirmation" class="form-control">
+        <v-required name="Password Confirmation" [validate]="createForm.get('password_confirmation')"></v-required>
+        <v-not-match name="Confirmation" match="Password" [validate]="createForm"></v-not-match>
+      </div>
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age" formControlName="age" class="form-control">
+        <v-max-number name="Age" [validate]="createForm.get('age')" maxNumber="150"></v-max-number>
+      </div>
+      <div class="form-group">
+        <label for="profession">Profession</label>
+        <input type="text" id="profession" name="profession" formControlName="profession" class="form-control">
+        <v-max-length [validate]="createForm.get('profession')" maxLength="255" name="Profession"></v-max-length>
+      </div>
+      <div class="form-group">
+        <label for="bio">Biography</label>
+        <textarea rows="3" id="bio" name="bio" formControlName="bio" class="form-control"></textarea>
+        <v-max-length [validate]="createForm.get('bio')" maxLength="255" name="Biography"></v-max-length>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-success mt-4 btn-md btn-block">Create New User</button>
+    </div>
+  </div>
+</form>

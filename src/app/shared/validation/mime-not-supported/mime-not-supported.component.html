@@ -1,0 +1,3 @@
+<span class="help-block validation" *ngIf="validate.errors && validate.errors.hasOwnProperty('mimeNotSupported') && validate.touched">
+  Extension is not supported. {{ name }} extension must be of the {{ supportedTypes }} mime types.
+</span>

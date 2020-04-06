@@ -1,0 +1,66 @@
+<ol class="breadcrumb mb-4 mt-4">
+  <li class="breadcrumb-item active">
+    Registered Users
+  </li>
+</ol>
+
+<a routerLink="/admin/users/create"
+   class="btn btn-success btn-sm mb-4 float-right">
+  Add New User
+</a>
+
+<div class="clearfix"></div>
+
+<ngx-datatable
+  class="material"
+  [rows]="rows"
+  [count]="usersCount"
+  [loadingIndicator]="userLoadingState"
+  [columns]="columns"
+  [columnMode]="columnMode"
+  headerHeight="50"
+  footerHeight="50"
+  rowHeight="auto"
+  [reorderable]="false">
+
+  <ngx-datatable-column resizeable="false" *ngFor="let col of columns" [name]="col.name" [prop]="col.prop">
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Email Verification" sortable="false" prop="email_verified_at">
+    <ng-template let-row="data" let-value="value" ngx-datatable-cell-template>
+      <span [class]="value ? 'verified' : 'not-verified'">{{ value ? 'Verified' : 'Pending' }}</span>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="" sortable="false" prop="id">
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      <a [routerLink]="'/admin/users/edit/' + value" class="btn btn-info btn-sm">
+        <fa-icon [icon]="editIcon"></fa-icon>
+      </a>
+      <button (click)="onDeleteClick(value)" class="btn btn-danger btn-sm">
+        <fa-icon [icon]="trashIcon"></fa-icon>
+      </button>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-footer>
+    <ng-template
+      ngx-datatable-footer-template
+      let-selectedCount="selectedCount"
+      let-curPage="curPage"
+      let-offset="offset"
+      let-isVisible="isVisible">
+      <datatable-pager
+        [pagerLeftArrowIcon]="'datatable-icon-left'"
+        [pagerRightArrowIcon]="'datatable-icon-right'"
+        [pagerPreviousIcon]="'datatable-icon-prev'"
+        [pagerNextIcon]="'datatable-icon-skip'"
+        [page]="curPage"
+        [size]="10"
+        [count]="usersCount"
+        (change)="onPageChange($event)">
+      </datatable-pager>
+    </ng-template>
+  </ngx-datatable-footer>
+
+</ngx-datatable>

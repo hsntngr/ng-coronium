@@ -1,0 +1,46 @@
+<div id="layoutAuthentication">
+  <div id="layoutAuthentication_content">
+    <main>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-5">
+            <div class="card shadow-lg border-0 rounded-lg mt-5">
+              <div class="card-header">
+                <h3 class="text-center font-weight-light my-4">Login</h3>
+              </div>
+              <div class="card-body">
+                <div class="alert alert-danger" *ngIf="validationErrors">
+                  <ul class="list-unstyled">
+                    <li *ngFor="let error of validationErrors">{{ error }}</li>
+                  </ul>
+                </div>
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                  <div class="form-group">
+                    <label class="small mb-1" for="email">Email</label>
+                    <input class="form-control py-4" formControlName="email"
+                           id="email" type="email" placeholder="Enter email address"/>
+                  </div>
+                  <div class="form-group">
+                    <label class="small mb-1" for="password">Password</label>
+                    <input class="form-control py-4" formControlName="password"
+                           id="password" type="password" placeholder="Enter password"/>
+                  </div>
+                  <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                      <input class="custom-control-input" formControlName="remember_me"
+                             id="remember_me" type="checkbox"/>
+                      <label class="custom-control-label" for="remember_me">Remember Me</label>
+                    </div>
+                  </div>
+                  <div class="form-group float-right">
+                    <button [disabled]="loginForm.invalid" class="btn btn-primary">Login</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

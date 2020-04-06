@@ -1,0 +1,14 @@
+<div class="alert alert-danger" *ngIf="alertView else formErrors">
+  <p>{{ message }}</p>
+  <p *ngFor="let message of messages">{{ message }}</p>
+</div>
+
+<ng-template #formErrors>
+  <span class="help-block validation">
+  {{ message }}
+</span>
+
+  <span class="help-block validation" *ngFor="let message of messages">
+  {{ message }}
+</span>
+</ng-template>
